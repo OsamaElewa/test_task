@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:test_task/core/utils/app_assets.dart';
-import 'package:test_task/core/utils/app_styles.dart';
+import 'package:test_task/core/utils/app_strings.dart';
+
 import 'package:test_task/features/home/presentation/views/widgets/categories_list.dart';
 import 'package:test_task/features/home/presentation/views/widgets/order_widget.dart';
 import 'package:test_task/features/home/presentation/views/widgets/services_widget.dart';
@@ -57,13 +57,13 @@ class _CustomTabBarState extends State<CustomTabBar>
             indicatorSize: TabBarIndicatorSize.tab,
             tabs: const [
               Tab(
-                text: 'Categories',
+                text: AppStrings.tapText1,
               ),
               Tab(
-                text: 'Services',
+                text: AppStrings.tapText2,
               ),
               Tab(
-                text: 'orders',
+                text: AppStrings.tapText3,
               ),
             ],
           ),
