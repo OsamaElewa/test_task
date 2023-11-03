@@ -1,6 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_task/core/utils/app_assets.dart';
+import 'package:test_task/core/utils/app_strings.dart';
+import 'package:test_task/features/home/presentation/cubits/user_cubit/user_cubit.dart';
+import 'package:test_task/features/home/presentation/cubits/user_cubit/user_state.dart';
 import 'package:test_task/features/home/presentation/views/widgets/categories_list_item.dart';
 import 'package:test_task/features/home/presentation/views/widgets/categories_view_row.dart';
 
@@ -23,21 +27,33 @@ class CategoriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const CategoriesViewRow(title: 'Categories View', seeAll: 'see all'),
-          SizedBox(
-            height: 400.h,
-            child: ListView.separated(
-              physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => CategoriesListItem(model: catList[index]),
-                separatorBuilder: (context, index) => const SizedBox(height: 10,),
-                itemCount: catList.length
+    return BlocBuilder<UserCubit, UserState>(
+  builder: (context, state) {
+    if(state is UserSuccessState){
+      return SingleChildScrollView(
+        child: Column(
+          children: [
+            const CategoriesViewRow(title: AppStrings.categoriesText, seeAll: AppStrings.seeAllText),
+            SizedBox(
+              height: 400.h,
+              child: ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) => CategoriesListItem(model: UserCubit.get(context).data!.users![index]),
+                  separatorBuilder: (context, index) => const SizedBox(height: 10,),
+                  itemCount: UserCubit.get(context).data!.users!.length
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    }else if(state is UserFailureState){
+      return const Text(AppStrings.messageErrorText);
+    }else{
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+  },
+);
   }
 }

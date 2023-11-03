@@ -9,6 +9,12 @@ class AppStrings {
   static const String emptyOrderText = 'No orders found';
   static const String emptyOrderText2 = 'You can place your needed orders';
   static const String emptyOrderText3 = 'to let serve you';
+  static const String tapText1 = 'Categories';
+  static const String tapText2 = 'Services';
+  static const String tapText3 = 'orders';
+  static const String messageErrorText = 'error';
+  static const String categoriesText = 'Categories View';
+  static const String seeAllText = 'see all';
 
 
   static const String emptyServicesText = 'No Services found';
